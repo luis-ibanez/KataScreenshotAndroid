@@ -18,6 +18,8 @@ package com.karumi.screenshot;
 
 import android.app.Activity;
 import android.support.test.InstrumentationRegistry;
+import android.support.test.espresso.Espresso;
+import android.support.test.espresso.contrib.RecyclerViewActions;
 import android.support.test.espresso.intent.rule.IntentsTestRule;
 import com.karumi.screenshot.di.MainComponent;
 import com.karumi.screenshot.di.MainModule;
@@ -81,6 +83,34 @@ public class MainActivityTest extends ScreenshotTest {
     givenThereAreSomeSuperHeroes(10, false);
 
     Activity activity = startActivity();
+
+    RecyclerViewActions.scrollToPosition(10);
+
+    compareScreenshot(activity);
+  }
+
+  @Test public void showsSuperheroAvengerIfThereIsOneSuperHeroAvenger() {
+    givenThereAreSomeSuperHeroes(1, true);
+
+    Activity activity = startActivity();
+
+    compareScreenshot(activity);
+  }
+
+  @Test public void showsTwoSuperheroesAvengersIfThereAreTwoSuperHeroesAvengers() {
+    givenThereAreSomeSuperHeroes(2, true);
+
+    Activity activity = startActivity();
+
+    compareScreenshot(activity);
+  }
+
+  @Test public void showsTenSuperheroesAvengersIfThereAreTenSuperHeroesAvengers() {
+    givenThereAreSomeSuperHeroes(10, true);
+
+    Activity activity = startActivity();
+
+    RecyclerViewActions.scrollToPosition(10);
 
     compareScreenshot(activity);
   }
